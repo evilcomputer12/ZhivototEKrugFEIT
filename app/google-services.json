@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1076366444491",
+    "project_id": "proektnazadacazivototekrug",
+    "storage_bucket": "proektnazadacazivototekrug.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1076366444491:android:42e49d347890003c0b184e",
+        "android_client_info": {
+          "package_name": "com.martin.proektnazadaca"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1076366444491-7pvl4jvsctcp5gak8j5f5mmddhuc7k4m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJKyQQNV7La11ujdOJna_TmLtFSU7Koxo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1076366444491-7pvl4jvsctcp5gak8j5f5mmddhuc7k4m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
