@@ -82,6 +82,8 @@ public class PostaroLiceActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.menu_home:
                         Toast.makeText(getApplicationContext(), "Home", Toast.LENGTH_SHORT).show();
+                        Intent mainA = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(mainA);
                     case R.id.menu_settings:
                         Toast.makeText(getApplicationContext(), "Home", Toast.LENGTH_SHORT).show();
                     case R.id.logout:
