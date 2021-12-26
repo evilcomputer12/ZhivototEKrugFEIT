@@ -84,7 +84,6 @@ public class ElderActivity extends AppCompatActivity {
                 }
             }
 
-            @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(getApplicationContext(), "Настана грешка", Toast.LENGTH_SHORT).show();
             }

@@ -89,8 +89,8 @@ public class PostaroLiceActivity extends AppCompatActivity {
                     case R.id.logout:
                         mAuth.signOut();
                         Toast.makeText(getApplicationContext(), "Се одјавивте", Toast.LENGTH_SHORT).show();
-                        Intent mainA = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(mainA);
+                        Intent mainA1 = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(mainA1);
                 }
                 return true;
             }
