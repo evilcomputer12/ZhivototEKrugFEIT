@@ -467,7 +467,8 @@ public class PostaroLiceActivity extends AppCompatActivity {
                 EditText input1 = new EditText(PostaroLiceActivity.this);
                 builder.setView(input1);
                 String text = input1.getText().toString();
-                if ((text.startsWith("007") && text.length() < 9) || (text.startsWith("++389") && text.length() < 13)) {
+
+                if (!((text.startsWith("007") && text.length() < 9) || (text.startsWith("++389") && text.length() < 13))) {
                     input1.setError("Не внесовте валиден телефонски број +389 или 07");
                     input1.requestFocus();
                 }
