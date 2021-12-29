@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.martin.proektnazadaca">
+    <uses-permission android:name="ANDROID.PERMISSION.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="ANDROID.PERMISSION.WRITE_EXTERNAL_STORAGE"/>
+    <meta-data android:name="firebase_analytics_collection_deactivated" android:value="true" />
 
     <application
         android:allowBackup="true"
@@ -45,6 +48,9 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" />
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"/>
     </application>
+
 
 </manifest>
