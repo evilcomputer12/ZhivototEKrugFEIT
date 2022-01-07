@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".PostaroLiceActivity">
+    tools:context=".PostaroLiceActivity"
+    >
 
     <include
         layout="@layout/content_home"/>

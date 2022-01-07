@@ -7,21 +7,10 @@
     tools:context=".PostaroLiceActivity"
     android:id="@+id/drawerLayout"
     android:fitsSystemWindows="true"
-    tools:openDrawer="left">
+    tools:openDrawer="left"
+    >
 
-    <include
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/appbar_home_navigation_drawer"
-        layout="@layout/appbar_home_drawer"/>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/toolbar"/>
-    </ScrollView>
 
 <!--    <com.google.android.material.navigation.NavigationView-->
 <!--        android:layout_width="wrap_content"-->
@@ -35,21 +24,47 @@
 
 
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/bla"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/old"
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/appbar_home_navigation_drawer"
+            layout="@layout/appbar_home_drawer"/>
+
+            <include
+                android:id="@+id/toolbar"
+                layout="@layout/toolbar"/>
+
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:paddingTop="?attr/actionBarSize"
+            android:id="@+id/recView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginBottom="32dp"
+            android:src="@drawable/ic_baseline_post_add_24"
+            app:backgroundTint="@color/naslov"
+            app:tint="@android:color/white"
+            app:fabSize="normal"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints" />
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.google.android.material.navigation.NavigationView

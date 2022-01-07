@@ -2,40 +2,36 @@ package com.martin.proektnazadaca;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.Manifest;
-import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
+import android.content.SharedPreferences;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.ContactsContract;
-import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -43,6 +39,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -58,10 +55,12 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
-import com.theartofdev.edmodo.cropper.CropImageActivity;
-import com.theartofdev.edmodo.cropper.CropImageView;
 
-import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -98,11 +97,26 @@ public class PostaroLiceActivity extends AppCompatActivity {
     ImageView editPhone;
 
 
+    AlertDialog.Builder dialogBuilder;
+    AlertDialog alertDialog;
+
+    FloatingActionButton fab;
+    EditText tskName, tskOpis, tskRok;
+    Spinner tskRep, tskUrg;
+    Button lokacijaIzbor, save6, cancel6;
+    TextView selected_location;
+
+    RecyclerView recyclerView;
+
+    AdapterPostaroLice adapterPostaroLice;
+
+    ArrayList<Aktivnost> taskList;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_postaro_lice);
-
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -127,6 +141,31 @@ public class PostaroLiceActivity extends AppCompatActivity {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
+
+        recyclerView = findViewById(R.id.recView);
+
+        reference = FirebaseDatabase.getInstance().getReference("Tasks");
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        taskList = new ArrayList<>();
+        adapterPostaroLice = new AdapterPostaroLice(this, taskList);
+        recyclerView.setAdapter(adapterPostaroLice);
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Aktivnost aktivnost = dataSnapshot.getValue(Aktivnost.class);
+                    taskList.add(aktivnost);
+                }
+                adapterPostaroLice.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -159,6 +198,9 @@ public class PostaroLiceActivity extends AppCompatActivity {
         editName = (ImageView) headerview.findViewById(R.id.editName);
         editEmail = (ImageView) headerview.findViewById(R.id.editEmail);
         editPhone = (ImageView) headerview.findViewById(R.id.editPhone);
+
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+
 
 
 
@@ -218,17 +260,107 @@ public class PostaroLiceActivity extends AppCompatActivity {
                 startActivityForResult(intent, CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE);
             }
         });
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newAktivnost();
+            }
+        });
     }
+
+
+
+    private void newAktivnost(){
+        dialogBuilder = new AlertDialog.Builder(this);
+        final View popUpView = getLayoutInflater().inflate(R.layout.postarolice_popup,null);
+        tskName = (EditText) popUpView.findViewById(R.id.tskName);
+        tskOpis = (EditText) popUpView.findViewById(R.id.tskOpis);
+        tskRok = (EditText) popUpView.findViewById(R.id.tskRok);
+        tskRep = (Spinner) popUpView.findViewById(R.id.tskRep);
+        tskUrg = (Spinner) popUpView.findViewById(R.id.tskUrg);
+        lokacijaIzbor = (Button) popUpView.findViewById(R.id.lokacijaIzbor);
+        save6 = (Button) popUpView.findViewById(R.id.save6);
+        cancel6 = (Button) popUpView.findViewById(R.id.cancel6);
+        selected_location = (TextView) popUpView.findViewById(R.id.selected_location);
+
+        dialogBuilder.setView(popUpView);
+        alertDialog = dialogBuilder.create();
+        alertDialog.show();
+        alertDialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+
+        selected_location.setText("Ја немате избрано вашата локација");
+        tskRok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDateTimeDialog(tskRok);
+            }
+        });
+        lokacijaIzbor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent getLocation = new Intent(PostaroLiceActivity.this, GetLocation.class);
+                //startActivityForResult(getLocation,MAP_ACTIVITY_REQUEST);
+                startActivity(getLocation);
+            }
+        });
+
+        save6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (TextUtils.isEmpty(tskName.getText().toString())) {
+                    tskName.setError("Не внесовте име на активност !");
+                    tskName.requestFocus();
+                } else if (TextUtils.isEmpty(tskOpis.getText().toString())) {
+                    tskOpis.setError("Не внесовте опис на активност !");
+                    tskOpis.requestFocus();
+                } else if (TextUtils.isEmpty(tskName.getText().toString())) {
+                    tskRok.setError("Не внесовте рок на извршување на активност !");
+                    tskRok.requestFocus();
+                } else if (selected_location.getText().toString().equals("Ја немате избрано вашата локација")) {
+                    lokacijaIzbor.setError("Изберете ја вашата локација");
+                    lokacijaIzbor.requestFocus();
+                } else {
+                    String timeStamp = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(Calendar.getInstance().getTime());
+                    String id = tskName.getText()+"-"+FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    Aktivnost aktivnost = new Aktivnost(FirebaseAuth.getInstance().getCurrentUser().getUid(), tskName.getText().toString(), tskOpis.getText().toString(), tskRok.getText().toString(), selected_location.getText().toString(), ime.getText().toString(), email.getText().toString(), phoneNum.getText().toString(), tskUrg.getSelectedItem().toString(), tskRep.getSelectedItem().toString(), timeStamp);
+                    FirebaseDatabase.getInstance().getReference("Tasks")
+                            .child(id)
+                            .setValue(aktivnost).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(PostaroLiceActivity.this, "Успешно внесена активност !", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(PostaroLiceActivity.this, "Настана грешка при внес на активност!" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }
+            }
+        });
+        cancel6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Uri resultUri = ImageManager.activityResult(requestCode, resultCode, data, getApplicationContext());
         //im.setImageURI(resultUri);
-        if(resultUri != null) {
-            uploadPicture(resultUri);
+        if(requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            if (resultUri != null) {
+                uploadPicture(resultUri);
+            }
         }
     }
+
+
 
 
     private void uploadPicture(Uri imageUri) {
@@ -273,6 +405,30 @@ public class PostaroLiceActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void showDateTimeDialog(final EditText tskRok){
+        final Calendar calendar = Calendar.getInstance();
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                calendar.set(Calendar.YEAR, year);
+                calendar.set(Calendar.MONTH, month);
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                        calendar.set(Calendar.MINUTE,minute);
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+                        tskRok.setText(simpleDateFormat.format(calendar.getTime()));
+                    }
+                };
+                new TimePickerDialog(PostaroLiceActivity.this,timeSetListener,calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),true).show();
+            }
+        };
+        new DatePickerDialog(PostaroLiceActivity.this,dateSetListener,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
     private void updateProfile(){
@@ -516,4 +672,15 @@ public class PostaroLiceActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onRestart()
+    {
+        super.onRestart();
+        SharedPreferences sharedPreferences = getSharedPreferences("com.martin.address", MODE_PRIVATE);
+        String address = sharedPreferences.getString("address", "Нема адреса");
+        selected_location.setText(address);
+
+    }
+
 }
