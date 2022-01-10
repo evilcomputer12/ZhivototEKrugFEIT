@@ -80,6 +80,9 @@ public class GetLocation extends AppCompatActivity implements OnMapReadyCallback
                         latLng, 15);
                 mMap.animateCamera(location);
                 mMap.addMarker(markerOptions);
+                Intent intent = new Intent();
+                intent.putExtra("address", getAddress(latLng));
+                setResult(RESULT_OK, intent);
 
             }
         });

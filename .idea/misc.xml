@@ -32,6 +32,7 @@
         <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/layout-w1240dp/activity_login.xml" value="0.13018741633199465" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/layout-w936dp/activity_login.xml" value="0.151953125" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/layout/activity_elder.xml" value="0.19375" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/layout/activity_get_aktivnost_location.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/layout/activity_get_current_location.xml" value="0.20104166666666667" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/layout/activity_get_location.xml" value="0.18697916666666667" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/layout/activity_logged_in.xml" value="0.17028985507246377" />
@@ -41,15 +42,20 @@
         <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/layout/activity_password_reset.xml" value="0.20260416666666667" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/layout/activity_postaro_lice.xml" value="0.296998420221169" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/layout/activity_splash_screen.xml" value="0.28804347826086957" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/layout/activity_user_profile_detail.xml" value="0.19739583333333333" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/layout/activity_volonter.xml" value="0.20208333333333334" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/layout/appbar_home_drawer.xml" value="0.1" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/layout/appbar_home_drawer1.xml" value="0.3625" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/layout/content_home.xml" value="0.1" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/layout/content_home1.xml" value="0.3625" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/layout/content_main.xml" value="0.20260416666666667" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/layout/custom_confirm_address.xml" value="0.21666666666666667" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/layout/headerfile.xml" value="0.33" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/layout/item.xml" value="0.5" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/layout/login_activity.xml" value="0.33" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/layout/navheader.xml" value="0.33" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/layout/navheader1.xml" value="0.3625" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/layout/postari_lica_list.xml" value="0.3032128514056225" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/layout/postarolice_popup.xml" value="0.33" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/layout/register_activity.xml" value="0.33" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/layout/toolbar.xml" value="0.1" />

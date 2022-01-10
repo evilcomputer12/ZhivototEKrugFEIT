@@ -18,6 +18,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.app.DialogFragment;
 import android.util.Log;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -59,7 +61,6 @@ public class ConfirmAddress extends DialogFragment implements
 
 
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,9 +72,19 @@ public class ConfirmAddress extends DialogFragment implements
 
     MapFragment mapFragment;
 
+    private static View v;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.custom_confirm_address, container, false);
+        if (v != null) {
+            ViewGroup parent = (ViewGroup) v.getParent();
+            if (parent != null)
+                parent.removeView(v);
+        }
+        try {
+            v = inflater.inflate(R.layout.custom_confirm_address, container, false);
+        } catch (InflateException e) {
+            /* map is already there, just return view as it is */
+        }
         myAddress = (TextView) v.findViewById(R.id.myAddress);
         SelectBtn = (Button) v.findViewById(R.id.Select);
         ChangeBtn = (Button) v.findViewById(R.id.Change);
@@ -88,12 +99,17 @@ public class ConfirmAddress extends DialogFragment implements
             public void onClick(View v) {
                 Toast.makeText(getActivity(), myAddress.getText().toString(), Toast.LENGTH_LONG).show();
                 getFragmentManager().beginTransaction().remove(mapFragment).commit();
-                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("com.martin.address", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("address",myAddress.getText().toString());
-                editor.apply();
-                Toast.makeText(getActivity(), "Saved Pref", Toast.LENGTH_SHORT).show();
+//                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("com.martin.address", MODE_PRIVATE);
+//                SharedPreferences.Editor editor = sharedPreferences.edit();
+//                editor.putString("address",myAddress.getText().toString());
+//                editor.apply();
+//                Toast.makeText(getActivity(), "Saved Pref", Toast.LENGTH_SHORT).show();
                 dismiss();
+                getFragmentManager()
+                        .beginTransaction()
+                        .remove(mapFragment)
+                        .commit();
+                getActivity().finish();
             }
         });
         ChangeBtn.setOnClickListener(new View.OnClickListener() {
@@ -116,11 +132,11 @@ public class ConfirmAddress extends DialogFragment implements
 
     }
 
-    @Override
-    public void onDismiss(DialogInterface dialog) {
-        super.onDismiss(dialog);
-        dismiss();
-    }
+//    @Override
+//    public void onDismiss(DialogInterface dialog) {
+//        super.onDismiss(dialog);
+//        dismiss();
+//    }
 
     @Override
     public void onClick(View v) {

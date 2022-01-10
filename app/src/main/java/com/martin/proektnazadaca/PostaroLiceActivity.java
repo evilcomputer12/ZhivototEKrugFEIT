@@ -87,6 +87,7 @@ public class PostaroLiceActivity extends AppCompatActivity {
     TextView email;
     TextView lice;
     TextView phoneNum;
+    TextView location;
 
     CircleImageView im;
 
@@ -95,6 +96,7 @@ public class PostaroLiceActivity extends AppCompatActivity {
     ImageView editName;
     ImageView editEmail;
     ImageView editPhone;
+    ImageView editLocation;
 
 
     AlertDialog.Builder dialogBuilder;
@@ -144,7 +146,7 @@ public class PostaroLiceActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recView);
 
-        reference = FirebaseDatabase.getInstance().getReference("Tasks");
+        reference = FirebaseDatabase.getInstance().getReference("Tasks").child(mAuth.getCurrentUser().getUid());
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         taskList = new ArrayList<>();
@@ -154,11 +156,13 @@ public class PostaroLiceActivity extends AppCompatActivity {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                taskList.clear();
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Aktivnost aktivnost = dataSnapshot.getValue(Aktivnost.class);
                     taskList.add(aktivnost);
                 }
                 adapterPostaroLice.notifyDataSetChanged();
+
             }
 
             @Override
@@ -194,10 +198,12 @@ public class PostaroLiceActivity extends AppCompatActivity {
         lice = (TextView) headerview.findViewById(R.id.kkorisnik);
         im = (CircleImageView) headerview.findViewById(R.id.kprofil);
         phoneNum = (TextView) headerview.findViewById(R.id.kphone);
+        location = (TextView) headerview.findViewById(R.id.klokacija);
 
         editName = (ImageView) headerview.findViewById(R.id.editName);
         editEmail = (ImageView) headerview.findViewById(R.id.editEmail);
         editPhone = (ImageView) headerview.findViewById(R.id.editPhone);
+        editLocation = (ImageView) headerview.findViewById(R.id.editLokacija);
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
 
@@ -220,12 +226,14 @@ public class PostaroLiceActivity extends AppCompatActivity {
                     String lice1 =  userProfile.PersonType;
                     String image = userProfile.ProfilePic;
                     String phone = userProfile.Phone;
+                    String addresa = userProfile.Location;
                     String fullname = ime1+" "+prezime1;
                     //View vi = inflater.inflate(R.layout.navheader, null);
                     ime.setText(fullname);
                     email.setText(email1);
                     lice.setText(lice1);
                     phoneNum.setText(phone);
+                    location.setText(addresa);
 
 
                     final String userKey = mAuth.getCurrentUser().getUid();
@@ -235,6 +243,14 @@ public class PostaroLiceActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             Picasso.get().load(uri).into(im);
+                            FirebaseDatabase.getInstance().getReference("Users").child(userKey).child("ProfilePic").setValue(String.valueOf(uri)).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                    } else {
+                                    }
+                                }
+                            });
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -321,10 +337,10 @@ public class PostaroLiceActivity extends AppCompatActivity {
                     lokacijaIzbor.requestFocus();
                 } else {
                     String timeStamp = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(Calendar.getInstance().getTime());
-                    String id = tskName.getText()+"-"+FirebaseAuth.getInstance().getCurrentUser().getUid();
                     Aktivnost aktivnost = new Aktivnost(FirebaseAuth.getInstance().getCurrentUser().getUid(), tskName.getText().toString(), tskOpis.getText().toString(), tskRok.getText().toString(), selected_location.getText().toString(), ime.getText().toString(), email.getText().toString(), phoneNum.getText().toString(), tskUrg.getSelectedItem().toString(), tskRep.getSelectedItem().toString(), timeStamp);
                     FirebaseDatabase.getInstance().getReference("Tasks")
-                            .child(id)
+                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                            .push()
                             .setValue(aktivnost).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -356,6 +372,39 @@ public class PostaroLiceActivity extends AppCompatActivity {
         if(requestCode==CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             if (resultUri != null) {
                 uploadPicture(resultUri);
+            }
+        }if (requestCode == 777) {
+            if (resultCode == RESULT_OK) {
+                String returnAddress = data.getStringExtra("address");
+                final String userKey = mAuth.getCurrentUser().getUid();
+
+                FirebaseDatabase.getInstance().getReference("Users").child(userKey).child("Location").setValue(returnAddress).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(getApplicationContext(), "Успешна промена на вашата адреса", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Настана грешка обидете се повторно", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+                reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        User userProfile = snapshot.getValue(User.class);
+
+                        if(userProfile != null){
+                            String address = userProfile.Location;
+                            location.setText(address);
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(getApplicationContext(), "Настана грешка", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
             }
         }
     }
@@ -396,14 +445,7 @@ public class PostaroLiceActivity extends AppCompatActivity {
             }
         });
 
-        FirebaseDatabase.getInstance().getReference("Users").child(userKey).child("ProfilePic").setValue(profilePicture).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                } else {
-                }
-            }
-        });
+
 
     }
 
@@ -462,6 +504,20 @@ public class PostaroLiceActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 editPhone.setVisibility(View.VISIBLE);
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        editPhone.setVisibility(View.INVISIBLE);
+                    }
+                }, 5000);
+
+            }
+        });
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editLocation.setVisibility(View.VISIBLE);
                 Handler handler = new Handler();
                 handler.postDelayed(new Runnable() {
                     @Override
@@ -671,6 +727,13 @@ public class PostaroLiceActivity extends AppCompatActivity {
                 ad.show();
             }
         });
+        editLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent lokacijaAktivity = new Intent(getApplicationContext(), GetLocation.class);
+                startActivityForResult(lokacijaAktivity, 777);
+            }
+        });
     }
 
     @Override
@@ -679,7 +742,15 @@ public class PostaroLiceActivity extends AppCompatActivity {
         super.onRestart();
         SharedPreferences sharedPreferences = getSharedPreferences("com.martin.address", MODE_PRIVATE);
         String address = sharedPreferences.getString("address", "Нема адреса");
-        selected_location.setText(address);
+        if(address == null){
+            selected_location.setText("NaN");
+        }
+        if(address.equals("")){
+            selected_location.setText("NaN");
+        }
+        else if(!address.equals("")){
+            selected_location.setText(address);
+        }
 
     }
 
