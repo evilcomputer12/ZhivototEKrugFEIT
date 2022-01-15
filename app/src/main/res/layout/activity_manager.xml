@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingStart="20dp"
+    android:paddingEnd="20dp"
+    android:fillViewport="true"
+    tools:context=".ManagerActivity">
+
+    <TextView
+        android:id="@+id/naslov"
+        android:layout_width="match_parent"
+        android:gravity="center"
+
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/naslov"
+        android:layout_height="wrap_content"
+        android:text="Детали на активност" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal">
+
+        <TextView
+            android:textSize="12sp"
+            android:textColor="@color/naslov"
+            android:id="@+id/imeAktivnostText"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Име на Активност" />
+
+        <TextView
+            android:textSize="12sp"
+            android:textColor="@color/naslov"
+            android:id="@+id/imeAktivnost"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal">
+
+        <TextView
+            android:textSize="12sp"
+            android:textColor="@color/naslov"
+            android:id="@+id/kraenRokText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Краен рок" />
+
+        <TextView
+            android:textSize="12sp"
+            android:textColor="@color/naslov"
+            android:id="@+id/kraenRok"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TextView" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal">
+
+        <TextView
+            android:textSize="12sp"
+            android:textColor="@color/naslov"
+            android:id="@+id/vremeNaKreiranjeText"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Време на креирање на активност" />
+
+        <TextView
+            android:textSize="12sp"
+            android:textColor="@color/naslov"
+            android:id="@+id/vremeNaKreiranje"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal">
+
+        <TextView
+            android:textSize="12sp"
+            android:textColor="@color/naslov"
+            android:id="@+id/lokacijaText"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Локација" />
+
+        <TextView
+            android:textSize="12sp"
+            android:textColor="@color/naslov"
+            android:id="@+id/lokacija"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal">
+
+        <TextView
+            android:textSize="12sp"
+            android:textColor="@color/naslov"
+            android:id="@+id/itnostText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Итна" />
+
+        <TextView
+            android:textSize="12sp"
+            android:textColor="@color/naslov"
+            android:id="@+id/itnost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TextView" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal">
+
+        <TextView
+            android:textSize="12sp"
+            android:textColor="@color/naslov"
+            android:id="@+id/povtorlivostText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Се повторува" />
+
+        <TextView
+            android:textSize="12sp"
+            android:textColor="@color/naslov"
+            android:id="@+id/povtorlivost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TextView" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal">
+
+        <TextView
+            android:textSize="12sp"
+            android:textColor="@color/naslov"
+            android:id="@+id/imeIPrezimeText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="За лицето" />
+
+        <TextView
+            android:textSize="12sp"
+            android:textColor="@color/naslov"
+            android:id="@+id/imeIPrezime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TextView" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal">
+
+        <TextView
+            android:textSize="12sp"
+            android:textColor="@color/naslov"
+            android:id="@+id/telefonText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Телефон" />
+
+        <TextView
+            android:textColor="@color/naslov"
+            android:id="@+id/telefonskiBroj"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TextView" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal">
+
+        <TextView
+            android:textSize="12sp"
+            android:textColor="@color/naslov"
+            android:id="@+id/emailText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Email" />
+
+        <TextView
+            android:textSize="12sp"
+            android:textColor="@color/naslov"
+            android:id="@+id/email_adresa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TextView" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal">
+
+        <TextView
+            android:textSize="12sp"
+            android:textColor="@color/naslov"
+            android:id="@+id/statusText"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Status" />
+
+        <TextView
+            android:textSize="12sp"
+            android:textColor="@color/naslov"
+            android:id="@+id/status"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/nemaVolonter"
+
+        android:orientation="horizontal">
+
+        <TextView
+            android:textSize="12sp"
+            android:textColor="@color/naslov"
+            android:id="@+id/volonterText"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Volonter" />
+
+        <TextView
+            android:textSize="12sp"
+            android:textColor="@color/naslov"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Seuste nema naznaceno" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/description"
+        android:orientation="horizontal">
+
+        <TextView
+            android:textSize="12sp"
+            android:textColor="@color/naslov"
+            android:id="@+id/opisText"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Опис" />
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/volonterInfo"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/volonterNaslov"
+            android:textColor="@color/naslov"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:text="Податоци за волонтер" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center_vertical"
+            >
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageProfile"
+                android:src="@drawable/account_circle_24"
+                android:layout_width="75dp"
+                android:layout_height="75dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:textSize="12sp"
+                android:textColor="@color/naslov"
+                android:id="@+id/volonterImePH"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Име и презиме" />
+
+            <TextView
+                android:textSize="12sp"
+                android:textColor="@color/naslov"
+                android:id="@+id/volonterIme"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Име и презиме" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:textSize="12sp"
+                android:textColor="@color/naslov"
+                android:id="@+id/volonterTelPH"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Телефонски број" />
+
+            <TextView
+                android:textSize="12sp"
+                android:textColor="@color/naslov"
+                android:id="@+id/volonterTel"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Телефонски број" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:textSize="12sp"
+                android:textColor="@color/naslov"
+                android:id="@+id/volonterEmailPH"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Email" />
+
+            <TextView
+                android:textSize="12sp"
+                android:textColor="@color/naslov"
+                android:id="@+id/volonterEmail"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Email" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:textSize="12sp"
+                android:textColor="@color/naslov"
+                android:id="@+id/volonterRejtingPH"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Оцена" />
+
+            <TextView
+                android:textSize="12sp"
+                android:textColor="@color/naslov"
+                android:id="@+id/volonterRejting"
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Оцена" />
+
+
+        </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:id="@+id/volonterButtons"
+        android:visibility="gone"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/volonterOdbi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FF0000"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:text="Одбиј" />
+
+        <Button
+            android:id="@+id/volonterPrifati"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/naslov"
+            android:layout_weight="1"
+            android:text="Прифати" />
+
+
+    </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/zavrsi"
+        android:backgroundTint="@color/naslov"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Затворете ја завршената активност" />
+
+    <Button
+        android:id="@+id/nazad"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:backgroundTint="@color/naslov"
+        android:text="Назад"
+        android:textSize="12sp" />
+
+</LinearLayout>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp"
+    android:orientation="vertical"
+    tools:context=".Zavrsi_Aktivnost">
+
+    <TextView
+        android:textColor="@color/naslov"
+        android:id="@+id/naslov"
+        android:layout_width="match_parent"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:text="Извештај за изработка на активноста" />
+
+    <TextView
+        android:id="@+id/ocenaText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="Напишете коментар за активноста"
+        android:textColor="@color/naslov" />
+
+    <EditText
+        android:backgroundTint="@color/naslov"
+        android:shadowColor="@color/naslov"
+        android:textColorHighlight="@color/naslov"
+        android:textColorHint="@color/naslov"
+        android:textColor="@color/naslov"
+        android:id="@+id/komentar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="25dp"
+        android:ems="10"
+        android:inputType="text"
+        android:minHeight="48dp"
+        android:hint="Коментар..." />
+
+
+    <RatingBar
+        android:id="@+id/ocena"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/naslov"
+        android:progressTint="@color/naslov"
+        android:stepSize="0.5"
+        />
+
+    <Button
+        android:id="@+id/zacuvaj"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Зачувај" />
+
+</LinearLayout>
