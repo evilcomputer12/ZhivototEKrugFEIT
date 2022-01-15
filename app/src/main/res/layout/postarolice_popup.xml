@@ -10,7 +10,7 @@
         android:id="@+id/tskName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="72dp"
         android:background="@drawable/custom_input"
         android:ems="10"
         android:hint="Име на активност"
@@ -25,7 +25,7 @@
         android:id="@+id/tskOpis"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:background="@drawable/custom_input"
         android:ems="10"
         android:hint="Опис на активност"
@@ -40,7 +40,7 @@
         android:id="@+id/tskRok"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/custom_input"
         android:ems="10"
         android:hint="Краен рок"
@@ -59,7 +59,7 @@
         android:text="Се повторува:  "
         android:textColor="@color/naslov"
         app:layout_constraintTop_toBottomOf="@+id/tskRok"
-        tools:layout_editor_absoluteX="16dp" />
+        tools:layout_editor_absoluteX="51dp" />
 
     <Spinner
         android:id="@+id/tskRep"
@@ -68,13 +68,13 @@
         android:layout_marginTop="8dp"
         android:entries="@array/itnost"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
-        tools:layout_editor_absoluteX="16dp" />
+        tools:layout_editor_absoluteX="51dp" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="192dp"
+        android:layout_marginStart="128dp"
         android:layout_marginTop="8dp"
         android:text="Итна:  "
         android:textColor="@color/naslov"
@@ -85,7 +85,7 @@
         android:id="@+id/tskUrg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="208dp"
+        android:layout_marginStart="144dp"
         android:layout_marginTop="8dp"
         android:entries="@array/itnost"
         app:layout_constraintStart_toEndOf="@+id/tskRep"
@@ -93,63 +93,54 @@
 
     <TextView
         android:id="@+id/selected_location"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:text="lokacija"
         android:textColor="@color/naslov"
-        android:textSize="12sp"
+        android:textSize="15sp"
         android:textStyle="bold"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.038"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="4dp"
         android:text="Локација:  "
         android:textColor="@color/naslov"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lokacijaIzbor" />
+        tools:layout_editor_absoluteY="426dp" />
 
     <Button
         android:id="@+id/cancel6"
         android:layout_width="131dp"
         android:layout_height="42dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="68dp"
         android:backgroundTint="@color/naslov"
         android:text="Излез"
+        app:layout_constraintEnd_toStartOf="@+id/save6"
+        app:layout_constraintHorizontal_bias="0.256"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selected_location" />
+        app:layout_constraintTop_toBottomOf="@+id/tskRep" />
 
     <Button
         android:id="@+id/save6"
         android:layout_width="131dp"
         android:layout_height="42dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="24dp"
         android:backgroundTint="@color/naslov"
         android:text="Зачувајте"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-    <Button
-        android:id="@+id/lokacijaIzbor"
-        android:layout_width="244dp"
-        android:layout_height="68dp"
-        android:layout_marginTop="64dp"
-        android:backgroundTint="@color/naslov"
-        android:text="Изберете ја вашата локација"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tskRok" />
+        app:layout_constraintTop_toBottomOf="@+id/tskUrg" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

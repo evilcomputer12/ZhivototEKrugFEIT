@@ -3,6 +3,31 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca - Copy/app/src/main/res/drawable/account_circle_24.xml" value="0.2296875" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca - Copy/app/src/main/res/drawable/ic_baseline_assignment_turned_in_24.xml" value="0.2296875" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca - Copy/app/src/main/res/layout/activity_get_location.xml" value="0.1953125" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca - Copy/app/src/main/res/layout/activity_logged_in.xml" value="0.1953125" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca - Copy/app/src/main/res/layout/activity_manager.xml" value="0.5" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca - Copy/app/src/main/res/layout/activity_organizator.xml" value="0.1953125" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca - Copy/app/src/main/res/layout/activity_postaro_lice.xml" value="0.1953125" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca - Copy/app/src/main/res/layout/activity_user_profile_detail.xml" value="0.20260416666666667" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca - Copy/app/src/main/res/layout/activity_volonter.xml" value="0.20625" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca - Copy/app/src/main/res/layout/activity_volonter_aktivnost_vo_process.xml" value="0.18125" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca - Copy/app/src/main/res/layout/activity_volonter_aktivnosti.xml" value="0.18229166666666666" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca - Copy/app/src/main/res/layout/activity_volonter_vo_proces_aktivnosti.xml" value="0.18229166666666666" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca - Copy/app/src/main/res/layout/activity_zavrsi_aktivnost.xml" value="0.25" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca - Copy/app/src/main/res/layout/custom_confirm_address.xml" value="0.19635416666666666" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca - Copy/app/src/main/res/layout/item.xml" value="0.5040106951871658" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca - Copy/app/src/main/res/layout/item_volonter.xml" value="0.48984771573604063" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca - Copy/app/src/main/res/layout/item_volonter1.xml" value="0.19635416666666666" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca - Copy/app/src/main/res/layout/item_volonter3.xml" value="0.5" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca - Copy/app/src/main/res/layout/postari_lica_list.xml" value="0.19635416666666666" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca - Copy/app/src/main/res/layout/postarolice_popup.xml" value="0.33" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca - Copy/app/src/main/res/layout/ratingbar.xml" value="0.20260416666666667" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca - Copy/app/src/main/res/layout/register_activity.xml" value="0.19635416666666666" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca - Copy/app/src/main/res/menu/menuitems.xml" value="0.21354166666666666" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca - Copy/app/src/main/res/menu/menuitems1.xml" value="0.21354166666666666" />
+        <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca - Copy/app/src/main/res/xml/provider_paths.xml" value="0.20104166666666667" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2140625" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/drawable-v24/phone_icon_focused.xml" value="0.21875" />
         <entry key="..\:/Users/marti/AndroidStudioProjects/proektnaZadaca/app/src/main/res/drawable/account_circle_24.xml" value="0.2140625" />

@@ -8,14 +8,14 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Use this location?"
+        android:text="Ќе ја користите избраната лоакција?"
         android:textColor="#000"
         android:textSize="18dp"
         ></TextView>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Use this location?"
+        android:text="Ќе ја користите избраната лоакција?"
         android:id="@+id/myAddress"
 
         ></TextView>
@@ -34,19 +34,21 @@
         android:gravity="right"
 
         >
+
         <Button
+            android:id="@+id/Change"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Change Location"
-            android:textColor="#000"
             android:layout_marginRight="20dp"
-            android:id="@+id/Change"
+            android:text="Променете локација"
+            android:textColor="#000"
 
             ></Button>
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Select"
+            android:text="Одбери"
             android:textColor="#000"
             android:id="@+id/Select"
             ></Button>

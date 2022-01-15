@@ -34,6 +34,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -81,8 +82,9 @@ public class PostaroLiceActivity extends AppCompatActivity {
     StorageReference storageReference;
 
     String userID;
-    DatabaseReference reference;
+    DatabaseReference reference, reference1;
 
+    String rating1;
     TextView ime;
     TextView email;
     TextView lice;
@@ -105,7 +107,7 @@ public class PostaroLiceActivity extends AppCompatActivity {
     FloatingActionButton fab;
     EditText tskName, tskOpis, tskRok;
     Spinner tskRep, tskUrg;
-    Button lokacijaIzbor, save6, cancel6;
+    Button  save6, cancel6;
     TextView selected_location;
 
     RecyclerView recyclerView;
@@ -113,6 +115,14 @@ public class PostaroLiceActivity extends AppCompatActivity {
     AdapterPostaroLice adapterPostaroLice;
 
     ArrayList<Aktivnost> taskList;
+
+    String cuserLocation;
+
+    String prPic;
+
+    String key = "";
+
+    String addresa;
 
 
     @Override
@@ -146,50 +156,15 @@ public class PostaroLiceActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recView);
 
-        reference = FirebaseDatabase.getInstance().getReference("Tasks").child(mAuth.getCurrentUser().getUid());
+        reference1 = FirebaseDatabase.getInstance().getReference("Tasks");
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         taskList = new ArrayList<>();
         adapterPostaroLice = new AdapterPostaroLice(this, taskList);
         recyclerView.setAdapter(adapterPostaroLice);
 
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                taskList.clear();
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    Aktivnost aktivnost = dataSnapshot.getValue(Aktivnost.class);
-                    taskList.add(aktivnost);
-                }
-                adapterPostaroLice.notifyDataSetChanged();
 
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.menu_home:
-                        Toast.makeText(getApplicationContext(), "Home", Toast.LENGTH_SHORT).show();
-                        Intent mainA = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(mainA);
-                    case R.id.menu_settings:
-                        Toast.makeText(getApplicationContext(), "Home", Toast.LENGTH_SHORT).show();
-                    case R.id.logout:
-                        mAuth.signOut();
-                        Toast.makeText(getApplicationContext(), "Се одјавивте", Toast.LENGTH_SHORT).show();
-                        Intent mainA1 = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(mainA1);
-                }
-                return true;
-            }
-        });
         user = mAuth.getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users");
         userID = user.getUid();
@@ -207,13 +182,6 @@ public class PostaroLiceActivity extends AppCompatActivity {
 
         fab = (FloatingActionButton) findViewById(R.id.fab);
 
-
-
-
-//        ime = findViewById(R.id.kime);
-//        email = findViewById(R.id.kemail);
-//        lice = findViewById(R.id.kkorisnik);
-
         reference.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -226,8 +194,15 @@ public class PostaroLiceActivity extends AppCompatActivity {
                     String lice1 =  userProfile.PersonType;
                     String image = userProfile.ProfilePic;
                     String phone = userProfile.Phone;
-                    String addresa = userProfile.Location;
+                    addresa = userProfile.Location;
+
+                    cuserLocation = addresa;
+                    prPic = image;
+
+
                     String fullname = ime1+" "+prezime1;
+                    rating1 = userProfile.Rating;
+
                     //View vi = inflater.inflate(R.layout.navheader, null);
                     ime.setText(fullname);
                     email.setText(email1);
@@ -282,6 +257,61 @@ public class PostaroLiceActivity extends AppCompatActivity {
                 newAktivnost();
             }
         });
+
+
+
+        reference1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                taskList.clear();
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    Aktivnost aktivnost = dataSnapshot.getValue(Aktivnost.class);
+
+                    user = FirebaseAuth.getInstance().getCurrentUser();
+                    userID = user.getUid();
+                    String id = (String) userID.toString();
+
+                    key = dataSnapshot.getKey();
+                    String cleanid = aktivnost.getId().trim();
+                    String trimid = id.toString().trim();
+                    if(cleanid.equals(trimid)){
+                        taskList.add(aktivnost);
+                    }
+
+                }
+                adapterPostaroLice.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.logout:
+                        mAuth.signOut();
+                        Toast.makeText(getApplicationContext(), "Се одјавивте", Toast.LENGTH_SHORT).show();
+                        Intent mainA1 = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(mainA1);
+                }
+                return true;
+            }
+        });
+
+
+
+
+
+//        ime = findViewById(R.id.kime);
+//        email = findViewById(R.id.kemail);
+//        lice = findViewById(R.id.kkorisnik);
+
+
     }
 
 
@@ -294,7 +324,6 @@ public class PostaroLiceActivity extends AppCompatActivity {
         tskRok = (EditText) popUpView.findViewById(R.id.tskRok);
         tskRep = (Spinner) popUpView.findViewById(R.id.tskRep);
         tskUrg = (Spinner) popUpView.findViewById(R.id.tskUrg);
-        lokacijaIzbor = (Button) popUpView.findViewById(R.id.lokacijaIzbor);
         save6 = (Button) popUpView.findViewById(R.id.save6);
         cancel6 = (Button) popUpView.findViewById(R.id.cancel6);
         selected_location = (TextView) popUpView.findViewById(R.id.selected_location);
@@ -304,19 +333,12 @@ public class PostaroLiceActivity extends AppCompatActivity {
         alertDialog.show();
         alertDialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
 
-        selected_location.setText("Ја немате избрано вашата локација");
+        //selected_location.setText("Ја немате избрано вашата локација");
+        selected_location.setText(location.getText());
         tskRok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDateTimeDialog(tskRok);
-            }
-        });
-        lokacijaIzbor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent getLocation = new Intent(PostaroLiceActivity.this, GetLocation.class);
-                //startActivityForResult(getLocation,MAP_ACTIVITY_REQUEST);
-                startActivity(getLocation);
             }
         });
 
@@ -332,15 +354,13 @@ public class PostaroLiceActivity extends AppCompatActivity {
                 } else if (TextUtils.isEmpty(tskName.getText().toString())) {
                     tskRok.setError("Не внесовте рок на извршување на активност !");
                     tskRok.requestFocus();
-                } else if (selected_location.getText().toString().equals("Ја немате избрано вашата локација")) {
-                    lokacijaIzbor.setError("Изберете ја вашата локација");
-                    lokacijaIzbor.requestFocus();
                 } else {
                     String timeStamp = new SimpleDateFormat("yyyy-MM-dd-HH-mm-ss").format(Calendar.getInstance().getTime());
-                    Aktivnost aktivnost = new Aktivnost(FirebaseAuth.getInstance().getCurrentUser().getUid(), tskName.getText().toString(), tskOpis.getText().toString(), tskRok.getText().toString(), selected_location.getText().toString(), ime.getText().toString(), email.getText().toString(), phoneNum.getText().toString(), tskUrg.getSelectedItem().toString(), tskRep.getSelectedItem().toString(), timeStamp);
+                    String key = reference.push().getKey();
+                    //id, itnost, lokacija, datum, povtorlivost, aktivnost, vreme, key
+                    Aktivnost aktivnost = new Aktivnost(FirebaseAuth.getInstance().getCurrentUser().getUid(), tskName.getText().toString(), tskOpis.getText().toString(), tskRok.getText().toString(), location.getText().toString(), ime.getText().toString(), email.getText().toString(), phoneNum.getText().toString(), tskUrg.getSelectedItem().toString(), tskRep.getSelectedItem().toString(), timeStamp, key);
                     FirebaseDatabase.getInstance().getReference("Tasks")
-                            .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                            .push()
+                            .child(key)
                             .setValue(aktivnost).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -735,23 +755,22 @@ public class PostaroLiceActivity extends AppCompatActivity {
             }
         });
     }
-
-    @Override
-    public void onRestart()
-    {
-        super.onRestart();
-        SharedPreferences sharedPreferences = getSharedPreferences("com.martin.address", MODE_PRIVATE);
-        String address = sharedPreferences.getString("address", "Нема адреса");
-        if(address == null){
-            selected_location.setText("NaN");
-        }
-        if(address.equals("")){
-            selected_location.setText("NaN");
-        }
-        else if(!address.equals("")){
-            selected_location.setText(address);
-        }
-
-    }
+//    SharedPreferences sharedPreferences = getSharedPreferences("com.martin.address", MODE_PRIVATE);
+//    String address = sharedPreferences.getString("address", "Нема адреса");
+//    @Override
+//    public void onRestart()
+//    {
+//        super.onRestart();
+//        if(address == null){
+//            selected_location.setText("NaN");
+//        }
+//        if(address.equals("")){
+//            selected_location.setText("NaN");
+//        }
+//        else if(!address.equals("")){
+//            selected_location.setText(address);
+//        }
+//
+//    }
 
 }

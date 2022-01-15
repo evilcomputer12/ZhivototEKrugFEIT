@@ -99,11 +99,11 @@ public class ConfirmAddress extends DialogFragment implements
             public void onClick(View v) {
                 Toast.makeText(getActivity(), myAddress.getText().toString(), Toast.LENGTH_LONG).show();
                 getFragmentManager().beginTransaction().remove(mapFragment).commit();
-//                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("com.martin.address", MODE_PRIVATE);
-//                SharedPreferences.Editor editor = sharedPreferences.edit();
-//                editor.putString("address",myAddress.getText().toString());
-//                editor.apply();
-//                Toast.makeText(getActivity(), "Saved Pref", Toast.LENGTH_SHORT).show();
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("com.martin.address", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("address",myAddress.getText().toString());
+                editor.apply();
+                Toast.makeText(getActivity(), "Saved Pref", Toast.LENGTH_SHORT).show();
                 dismiss();
                 getFragmentManager()
                         .beginTransaction()

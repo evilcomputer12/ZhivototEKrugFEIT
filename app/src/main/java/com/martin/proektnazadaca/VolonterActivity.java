@@ -159,63 +159,6 @@ public class VolonterActivity extends AppCompatActivity {
         adapterPostariLiceLista = new AdapterListaPostariLica(this, userList);
         recyclerView.setAdapter(adapterPostariLiceLista);
 
-
-
-        Query query = reference.orderByChild("PersonType").equalTo("Повозрасно Лице");
-        query.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                userList.clear();
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    //Users users = dataSnapshot.getValue(Users.class);
-                    String name = dataSnapshot.child("FirstName").getValue(String.class);
-                    String lname = dataSnapshot.child("LastName").getValue(String.class);
-                    String profpic = dataSnapshot.child("ProfilePic").getValue(String.class);
-                    String location = dataSnapshot.child("Location").getValue(String.class);
-                    String utype = dataSnapshot.child("PersonType").getValue(String.class);
-                    //String distance = dataSnapshot.child("Distance").getValue(String.class);
-                    String rating = dataSnapshot.child("Rating").getValue(String.class);
-                    String uid1 = dataSnapshot.child("Uid").getValue(String.class);
-                    LatLng endLocation = getLocationFromAddress(getApplicationContext(), cuserLocation);
-                    LatLng beginLocation = getLocationFromAddress(getApplicationContext(),location);
-                    String distance = String.valueOf(distanceBetween(beginLocation, endLocation).intValue());
-                    Users users = new Users(name,lname,utype,profpic,location,distance,rating,uid1);
-                    Collections.sort(userList, new Comparator<Users>() {
-                        @Override
-                        public int compare(Users o1, Users o2) {
-                            return o1.getDist().compareToIgnoreCase(o2.getDist());
-                        }
-                    });
-                    userList.add(users);
-                }
-                adapterPostariLiceLista.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.menu_home:
-                        Toast.makeText(getApplicationContext(), "Home", Toast.LENGTH_SHORT).show();
-                        Intent mainA = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(mainA);
-                    case R.id.menu_settings:
-                        Toast.makeText(getApplicationContext(), "Home", Toast.LENGTH_SHORT).show();
-                    case R.id.logout:
-                        mAuth.signOut();
-                        Toast.makeText(getApplicationContext(), "Се одјавивте", Toast.LENGTH_SHORT).show();
-                        Intent mainA1 = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(mainA1);
-                }
-                return true;
-            }
-        });
         user = mAuth.getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users");
         userID = user.getUid();
@@ -302,6 +245,62 @@ public class VolonterActivity extends AppCompatActivity {
                 startActivityForResult(intent, CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE);
             }
         });
+
+        Query query = reference.orderByChild("PersonType").equalTo("Повозрасно Лице");
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                userList.clear();
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    //Users users = dataSnapshot.getValue(Users.class);
+                    String name = dataSnapshot.child("FirstName").getValue(String.class);
+                    String lname = dataSnapshot.child("LastName").getValue(String.class);
+                    String profpic = dataSnapshot.child("ProfilePic").getValue(String.class);
+                    String location = dataSnapshot.child("Location").getValue(String.class);
+                    String utype = dataSnapshot.child("PersonType").getValue(String.class);
+                    //String distance = dataSnapshot.child("Distance").getValue(String.class);
+                    String rating = dataSnapshot.child("Rating").getValue(String.class);
+                    String uid1 = dataSnapshot.child("Uid").getValue(String.class);
+                    LatLng endLocation = getLocationFromAddress(getApplicationContext(), cuserLocation);
+                    LatLng beginLocation = getLocationFromAddress(getApplicationContext(),location);
+                    String distance = String.valueOf(distanceBetween(beginLocation, endLocation).intValue());
+                    Users users = new Users(name,lname,utype,profpic,location,distance,rating,uid1);
+                    Collections.sort(userList, new Comparator<Users>() {
+                        @Override
+                        public int compare(Users o1, Users o2) {
+                            return o1.getDist().compareToIgnoreCase(o2.getDist());
+                        }
+                    });
+                    userList.add(users);
+                }
+                adapterPostariLiceLista.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if(item.getItemId() == R.id.menu_home){
+                    Intent intent1 = new Intent(getApplicationContext(), VolonterActivity.class);
+                    startActivity(intent1);
+                }else if(item.getItemId() == R.id.menu_settings){
+                    Intent intent2 = new Intent(getApplicationContext(), VolonterAktivnostVoProcess.class);
+                    startActivity(intent2);
+                }else if(item.getItemId() == R.id.logout){
+                    mAuth.signOut();
+                    Toast.makeText(getApplicationContext(), "Се одлогиравте !", Toast.LENGTH_SHORT).show();
+                    Intent intent3 = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent3);
+                }
+                return onOptionsItemSelected(item);
+            }
+        });
+
 
     }
 
