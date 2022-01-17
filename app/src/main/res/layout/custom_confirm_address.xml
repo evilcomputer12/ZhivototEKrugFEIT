@@ -40,16 +40,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="20dp"
-            android:text="Променете локација"
-            android:textColor="#000"
+            android:text="Пром. лок."
+            android:textColor="#fff"
 
             ></Button>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Одбери"
-            android:textColor="#000"
+            android:text="Одберете"
+            android:textColor="#fff"
             android:id="@+id/Select"
             ></Button>
 
