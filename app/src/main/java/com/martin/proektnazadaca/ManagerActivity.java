@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,8 +40,9 @@ public class ManagerActivity extends AppCompatActivity implements View.OnClickLi
     String id;
     LinearLayout volonterButtons, volonterInfo, nemaVolonter;
     TextView imeAktivnost,kraenRok,vremeNaKreiranje,lokacija,itnost,povtorlivost,imeIPrezime,telefonskiBroj,email_adresa,status,volonterText, opisText;
-    TextView imePrezime, tel, rejting, email;
+    TextView imePrezime, tel,  email;
     CircleImageView imageProfile;
+    RatingBar rejting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,7 +171,7 @@ public class ManagerActivity extends AppCompatActivity implements View.OnClickLi
                                     imePrezime.setText(imePrezimeS);
                                     tel.setText(telS);
                                     email.setText(emailS);
-                                    rejting.setText(rejtingS);
+                                    rejting.setRating(Float.parseFloat(rejtingS));
 
                                 }
                             }
