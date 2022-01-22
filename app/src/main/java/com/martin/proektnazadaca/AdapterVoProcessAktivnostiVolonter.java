@@ -6,6 +6,7 @@ import static android.view.View.VISIBLE;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,6 +74,15 @@ public class AdapterVoProcessAktivnostiVolonter extends RecyclerView.Adapter<Ada
 
         holder.nazad.setOnClickListener(back);
 
+        holder.Address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "bla", Toast.LENGTH_SHORT).show();
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?q=loc:"+aktivnost.getLokacijaAktivnost()));
+                context.startActivity(browserIntent);
+            }
+        });
+
         if(aktivnost.getStatus().equals("Пријавен волонтер")){
             holder.Status.setText("Се чека одговор од: "+ String.valueOf(holder.UserName.getText()));
         } else if(aktivnost.getStatus().equals("Закажана активност")){
@@ -111,6 +121,7 @@ public class AdapterVoProcessAktivnostiVolonter extends RecyclerView.Adapter<Ada
                     context.startActivity(intent);
                 }
             });
+
 
 
         }
