@@ -84,6 +84,15 @@ public class AdapterAktivnostiVolonter extends RecyclerView.Adapter<AdapterAktiv
         String bla = aktivnost.key;
         holder.id1 = aktivnost.getId();
 
+        holder.Address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "bla", Toast.LENGTH_SHORT).show();
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?q=loc:"+aktivnost.getLokacijaAktivnost()));
+                context.startActivity(browserIntent);
+            }
+        });
+
     }
 
 
