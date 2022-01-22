@@ -138,7 +138,7 @@ public class ManagerActivity extends AppCompatActivity implements View.OnClickLi
                     telefonskiBroj.setText(telefonskiBroj1);
                     email_adresa.setText(email_adresa1);
                     status.setText(status1);
-                    volonterText.setText(opisText1);
+                    opisText.setText(opisText1);
 
                     //opisText.setText();
 
