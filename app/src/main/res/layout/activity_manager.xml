@@ -259,7 +259,7 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Status" />
+            android:text="Статус" />
 
         <TextView
             android:textSize="12sp"
@@ -285,7 +285,7 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Volonter" />
+            android:text="Волонтер" />
 
         <TextView
             android:textSize="12sp"
@@ -293,7 +293,7 @@
             android:layout_width="match_parent"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="Seuste nema naznaceno" />
+            android:text="Немате определено волонтер" />
 
 
     </LinearLayout>
@@ -427,22 +427,19 @@
             android:layout_height="wrap_content" >
 
             <TextView
-                android:textSize="12sp"
-                android:textColor="@color/naslov"
                 android:id="@+id/volonterRejtingPH"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="Оцена" />
-
-            <TextView
-                android:textSize="12sp"
+                android:layout_width="186dp"
+                android:layout_height="match_parent"
+                android:text="Оцена"
                 android:textColor="@color/naslov"
+                android:textSize="12sp" />
+
+            <RatingBar
                 android:id="@+id/volonterRejting"
-                android:layout_width="match_parent"
-                android:layout_weight="1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Оцена" />
+                style="?android:attr/ratingBarStyleSmall"
+                />
 
 
         </LinearLayout>
